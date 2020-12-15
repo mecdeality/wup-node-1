@@ -13,8 +13,17 @@
     <div className="starter-template">
       <h1><%= post.title %> </h1>
       <p className="lead"><%= post.body %></p>
-      <!-- <button onClick={this.handleDelete}>Delete</button> -->
-  </div>
+      <button id='deleteBtn' data-id=<%= post.id %> type="submit">Delete</button>
+    </div>
   </div>
 </body>
+<script>
+  document.getElementById('deleteBtn').addEventListener("click", function(){
+    const id = this.getAttribute('data-id');
+    fetch('/posts/'+id, {
+      method: 'DELETE'
+    }).then(res => res.json())
+      .then(data => window.location.href = data);
+  })
+</script>
 </html>
